@@ -7,7 +7,9 @@ app.use(cors());
 app.use(
   createProxyMiddleware({
     router: (req) => new URL(req.path.substring(1)),
-    pathRewrite: (path, req) => new URL(req.path.substring(1)).pathname,
+    pathRewrite: (path, req) => {
+      return path.replace("/", "");
+    },
     changeOrigin: true,
     logger: console,
   })
